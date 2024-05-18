@@ -1,3 +1,4 @@
+#file: noinspection YAMLSchemaValidation
 version: 2.1
 
 jobs:
@@ -9,6 +10,8 @@ jobs:
       - run:
           name: Analyze on SonarCloud
           command: mvn verify sonar:sonar -Dsonar.projectKey=IlinAndrey_pr1_ui
+      - store_test_results:
+        path: test-results
 
 workflows:
   main:
