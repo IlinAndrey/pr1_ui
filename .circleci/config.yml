@@ -12,7 +12,16 @@ jobs:
           command: mvn verify sonar:sonar -Dsonar.projectKey=IlinAndrey_pr1_ui
 
       - store_test_results:
-          path: ~/test-results
+          name: Store Jest Test Results
+          path: test-results/jest
+
+      - store_test_results:
+          name: Store Mocha Test Results
+          path: test-results/mocha
+
+      - store_test_results:
+          name: Store RSpec Test Results
+          path: test-results/rspec
 
 workflows:
   main:
