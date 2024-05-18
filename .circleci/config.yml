@@ -11,7 +11,7 @@ jobs:
           name: Analyze on SonarCloud
           command: mvn verify sonar:sonar -Dsonar.projectKey=IlinAndrey_pr1_ui
       - store_test_results:
-        path: test-results
+        path: ~/test-results
 
 workflows:
   main:
