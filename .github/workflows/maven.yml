@@ -10,28 +10,28 @@ jobs:
     name: Build and analyze
     runs-on: ubuntu-latest
     steps:
-        -	uses: actions/checkout@v3
-          with:
-            fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
-        -	name: Set up JDK 22
-          uses: actions/setup-java@v3
-          with:
-            java-version: 22
-            distribution: 'zulu' # Alternative distribution options are available.
-        -	name: Cache SonarCloud packages
-          uses: actions/cache@v3
-          with:
-              path: ~/.sonar/cache
-              key: ${{ runner.os }}-sonar
-              restore-keys: ${{ runner.os }}-sonar
-        -	name: Cache Maven packages
-          uses: actions/cache@v3
-          with:
-            path: ~/.m2
-            key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-            restore-keys: ${{ runner.os }}-m2
-        -	name: Build and analyze
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven- plugin:sonar -Dsonar.projectKey=IlinAndrey_pr1_ui
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Set up JDK 22
+        uses: actions/setup-java@v3
+        with:
+          java-version: 22
+          distribution: 'zulu' # Alternative distribution options are available.
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+            path: ~/.sonar/cache
+            key: ${{ runner.os }}-sonar
+            restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: 6b097f3ec657f4fef2f1774a8037302916ffe47f # Needed to get PR information, if any
+          SONAR_TOKEN: 0feaa89556b4a1c9c429bb734298cfb846a88e1c
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven- plugin:sonar -Dsonar.projectKey=IlinAndrey_pr1_ui
