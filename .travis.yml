@@ -8,9 +8,4 @@ addons:
     organization: "ilinandrey"
 
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=IlinAndrey_pr1_ui -Dsonar.login=${SONAR_TOKEN}
-
-cache:
-  directories:
-    - '$HOME/.m2/repository'
-    - '$HOME/.sonar/cache'
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=IlinAndrey_pr1_ui -Dsonar.login=0feaa89556b4a1c9c429bb734298cfb846a88e1c
