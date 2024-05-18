@@ -33,5 +33,5 @@ jobs:
       - name: Build and analyze
         env:
           GITHUB_TOKEN: 6b097f3ec657f4fef2f1774a8037302916ffe47f
-          SONAR_TOKEN: 0feaa89556b4a1c9c429bb734298cfb846a88e1c
+          SONAR_TOKEN: 3d0c513b8ba8968b7d512df923fdc60ecba2da3f
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=IlinAndrey_pr1_ui
