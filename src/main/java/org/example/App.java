@@ -1,10 +1,10 @@
 package org.example;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class App
-{
-    private static class Person {
+public class App {
+    static class Person {
         private String name;
         private int age;
 

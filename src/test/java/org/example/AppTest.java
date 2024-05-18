@@ -2,12 +2,15 @@ package org.example;
 
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 public class AppTest extends TestCase {
 
     private App.PersonManager manager;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
 
     public AppTest(String testName) {
         super(testName);
@@ -21,6 +24,14 @@ public class AppTest extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         manager = new App.PersonManager();
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        System.setOut(originalOut);
+        outContent.reset();
     }
 
     public void testAddPerson() {
@@ -61,20 +72,22 @@ public class AppTest extends TestCase {
         manager.addPerson("Bob", 25);
         manager.addPerson("Charlie", 35);
 
-        // Capture the output of printAllPeople() using a ByteArrayOutputStream
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(outContent));
-
         manager.printAllPeople();
 
         String expectedOutput = "Name: Alice, Age: 30\n" +
                 "Name: Bob, Age: 25\n" +
                 "Name: Charlie, Age: 35\n";
-        assertEquals(expectedOutput.trim(), outContent.toString().trim());
 
-        // Restore the original System.out
-        System.setOut(originalOut);
+        String actualOutput = outContent.toString().replace("\r\n", "\n").replace("\r", "\n");
+
+        System.setOut(originalOut);  // Restore the original System.out before any assertions
+
+        // Debugging output
+        System.out.println("Expected Output:\n" + expectedOutput);
+        System.out.println("Actual Output:\n" + actualOutput);
+
+        // Compare outputs
+        assertEquals(expectedOutput, actualOutput);
     }
 
     public void testApp() {
