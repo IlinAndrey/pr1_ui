@@ -80,13 +80,10 @@ public class AppTest extends TestCase {
 
         String actualOutput = outContent.toString().replace("\r\n", "\n").replace("\r", "\n");
 
-        System.setOut(originalOut);  // Restore the original System.out before any assertions
+        System.setOut(originalOut);
 
-        // Debugging output
         System.out.println("Expected Output:\n" + expectedOutput);
         System.out.println("Actual Output:\n" + actualOutput);
-
-        // Compare outputs
         assertEquals(expectedOutput, actualOutput);
     }
 
