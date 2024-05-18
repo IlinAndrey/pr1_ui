@@ -13,15 +13,15 @@ jobs:
 
       - store_test_results:
           name: Store Jest Test Results
-          path: test-results/jest
+          path: test-results/jest/result.xml
 
       - store_test_results:
           name: Store Mocha Test Results
-          path: test-results/mocha
+          path: test-results/mocha/result.xml
 
       - store_test_results:
           name: Store RSpec Test Results
-          path: test-results/rspec
+          path: test-results/rspec/result.xml
 
 workflows:
   main:
