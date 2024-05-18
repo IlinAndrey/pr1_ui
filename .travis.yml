@@ -1,16 +1,9 @@
-language: java
-
-jdk:
-  - openjdk11
-
 addons:
   sonarcloud:
     organization: "ilinandrey"
+    token:
+      secure: "0feaa89556b4a1c9c429bb734298cfb846a88e1c" # encrypted value of your token
 
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=IlinAndrey_pr1_ui -Dsonar.login=0feaa89556b4a1c9c429bb734298cfb846a88e1c
-
-cache:
-  directories:
-    - '$HOME/.m2/repository'
-    - '$HOME/.sonar/cache'
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
