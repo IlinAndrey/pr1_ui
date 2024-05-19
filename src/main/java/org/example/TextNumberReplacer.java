@@ -5,6 +5,7 @@ import java.util.*;
 public class TextNumberReplacer {
 
     private static final Map<String, Integer> numberMap = new HashMap<>();
+    private static final Set<String> largeUnits = new HashSet<>(Arrays.asList("тысяча", "тысяч", "миллион", "миллионов", "миллиард"));
 
     static {
         numberMap.put("ноль", 0);
@@ -48,7 +49,7 @@ public class TextNumberReplacer {
         numberMap.put("тысяч", 1000);
         numberMap.put("миллион", 1000000);
         numberMap.put("миллионов", 1000000);
-        numberMap.put("миллиарда", 1000000000);
+        numberMap.put("миллиард", 1000000000);
     }
 
     public static void main(String[] args) {
@@ -94,19 +95,19 @@ public class TextNumberReplacer {
     }
 
     private static String convertWordsToNumber(List<String> numberWords) {
-        int number = 0;
-        int tempNumber = 0;
+        long number = 0;
+        long tempNumber = 0;
 
         for (String word : numberWords) {
             int value = numberMap.get(word);
-            if (value == 1000 || value == 1000000 || value == 1000000000) {
+            if (largeUnits.contains(word)) {
                 if (tempNumber == 0) {
                     tempNumber = 1;
                 }
                 number += tempNumber * value;
                 tempNumber = 0;
             } else if (value >= 100) {
-                tempNumber *= value;
+                tempNumber += value;
             } else {
                 tempNumber += value;
             }
