@@ -62,7 +62,6 @@ public class TextNumberReplacer {
                 inputText.append(line).append("\n");
             }
         } catch (IOException e) {
-            e.printStackTrace();
             return;
         }
 
