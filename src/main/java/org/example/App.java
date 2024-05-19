@@ -59,32 +59,5 @@ public class App {
     }
 
     public static void main(String[] args) {
-        PersonManager manager = new PersonManager();
-
-        manager.addPerson("Alice", 30);
-        manager.addPerson("Bob", 25);
-        manager.addPerson("Charlie", 35);
-
-        System.out.println("All people:");
-        manager.printAllPeople();
-
-        System.out.println("\nSearching for Bob:");
-        Person foundPerson = manager.findPersonByName("Bob");
-        if (foundPerson != null) {
-            foundPerson.printInfo();
-        } else {
-            System.out.println("Person not found.");
-        }
-
-        System.out.println("\nRemoving Alice:");
-        boolean removed = manager.removePersonByName("Alice");
-        if (removed) {
-            System.out.println("Alice was removed successfully.");
-        } else {
-            System.out.println("Alice was not found.");
-        }
-
-        System.out.println("\nAll people after removal:");
-        manager.printAllPeople();
     }
 }
