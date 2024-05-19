@@ -1,4 +1,5 @@
 package org.example;
+
 import java.io.*;
 import java.util.*;
 
@@ -48,8 +49,11 @@ public class TextNumberReplacer {
         numberMap.put("тысяча", 1000);
         numberMap.put("тысяч", 1000);
         numberMap.put("миллион", 1000000);
+        numberMap.put("миллиона", 1000000);
         numberMap.put("миллионов", 1000000);
         numberMap.put("миллиард", 1000000000);
+        numberMap.put("миллиарда", 1000000000);
+        numberMap.put("миллиардов", 1000000000);
     }
 
     public static void main(String[] args) {
@@ -70,7 +74,7 @@ public class TextNumberReplacer {
         System.out.println(outputText);
     }
 
-    private static String replaceNumberWords(String text) {
+    public static String replaceNumberWords(String text) {
         String[] words = text.split("\\s+");
         StringBuilder result = new StringBuilder();
         List<String> numberWords = new ArrayList<>();
@@ -100,13 +104,11 @@ public class TextNumberReplacer {
         for (String word : numberWords) {
             int value = numberMap.get(word);
             if (largeUnits.contains(word)) {
-                if (tempNumber == 0) {
-                    tempNumber = 1;
+                if (tempNumber != 0) {
+                    tempNumber *= value;
+                } else {
+                    tempNumber = value;
                 }
-                number += tempNumber * value;
-                tempNumber = 0;
-            } else if (value >= 100) {
-                tempNumber += value;
             } else {
                 tempNumber += value;
             }
@@ -115,4 +117,5 @@ public class TextNumberReplacer {
 
         return String.valueOf(number);
     }
+
 }
